@@ -9,7 +9,10 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@vee-validate/nuxt',
     '@pinia/nuxt',
-    'nuxt-jwt-auth'
+    '@pinia-plugin-persistedstate/nuxt',
+
+    'nuxt-jwt-auth',
+    '@nuxt/image',
     // '@sidebase/nuxt-auth'
 
   ],
@@ -26,6 +29,12 @@ export default defineNuxtConfig({
       login: '/login', // Where to redirect if user is not logged in and accesses a logged-only route
       logout: '/logout' // Where to redirect if user is logged in and accesses a guest-only route 
     }
+  },
+  runtimeConfig: {
+    public: {
+      API_BASE_URL: process.env.API_BASE_URL,
+ 
+    },
   },
  
   devtools: { enabled: true }
