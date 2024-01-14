@@ -4,6 +4,7 @@ import { defineStore } from "pinia";
 export const useAuthStore = defineStore('auth', {
  state: () => {
     return {
+      loginData:{},
       token:'',
       isloggedIn:false,
       user:{}
@@ -12,9 +13,12 @@ export const useAuthStore = defineStore('auth', {
 
 
   actions: {
-    login(item) {
-      console.log(item)
+
+    saveLoginData(loginObject){
+      console.log(loginObject)
+      this.loginData = {...loginObject};
     },
+    
     logout(item){
 
     }
