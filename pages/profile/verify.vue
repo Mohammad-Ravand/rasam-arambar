@@ -18,9 +18,6 @@ const inputThree = ref(null);
 const inputFour =  ref(null);
 const buttonConfirm = ref(null);
 
-function focusInputRef(inputRef) {
-  inputRef.value.focus();
-}
 
 function focusNext(e,inputRef){
     if(e.target.value.length>0){
@@ -28,19 +25,15 @@ function focusNext(e,inputRef){
     }
 }
 
+const one =  useInputCode()
+const two =  useInputCode()
+const three =  useInputCode()
+const four =  useInputCode()
 
-function changeOne(e){
-    const value = e.target.value;
-    console.log('change one: --- '+value)
-    otpCode.value.one  = value;
-    focusNext(e,inputTwo.value)
-
-}
-
-
-
+// login user
 async function login(item) {
-  const { message } = await $fetch(
+  try {
+    const r = await $fetch(
     `${runtimeConfig.public.API_BASE_URL}otp/send-otp`,
     {
       method: "POST",
@@ -55,25 +48,20 @@ async function login(item) {
       },
     }
   );
+  } catch (error) {
+    
+  }
 
-  console.log(count, message);
 }
 
 
-watch(()=> otpCode.one, (newValue, oldValue) => {
-  console.log('otpCode changed:', newValue, 'from', oldValue);
-});
 
 onMounted(()=>{
-//   login()
+  inputOne.value.focus()
+  login()
 })
 
 
-
-function handleInputOne(e){
-    console.log('handle input one')
-    otpCode.value.one='';
-}
 
 
 
@@ -83,38 +71,37 @@ function handleInputOne(e){
   <div
     class="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100"
   >
-    <div class="mb-8 flex justify-center">
+    <div class="mb-8 flex h-52 w-52 -mr-24 justify-center">
       <img alt="Phone" class="h-40 mx-auto" src="/images/otp.webp" />
     </div>
 
     <div class="mt-4 text-center">
       <form action="" method="post">
         <div class="flex flex-col space-y-16">
+          <div class="flex flex-col gap-4 items-center">
           <div
             class="flex flex-row items-center justify-between mx-auto w-full max-w-xs"
           >
             <div class="w-16 h-16 pr-1 mr-2">
+
               <input
+              @keyup="(e)=>focusNext(e,inputTwo)"
+
                 ref="inputOne"
-                @input="(e)=>handleInputOne(e)"
-                class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none  bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none pr-1"
+                class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none  bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none "
                 type="text"
                 pattern="[0-9]"
-                maxlength="2"
-                size="1"
-
+                v-model="one"
                 required
               />
             </div>
             <div class="w-16 h-16 pr-1 mr-2">
               <input
                 @keyup="(e)=>focusNext(e,inputThree)"
-              ref="inputTwo"
-                class="text-4xl  text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none  bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none pr-1"
+                ref="inputTwo"
+                class="text-4xl  text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none  bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none "
                 type="text"
-                size="1"
-                maxlength="1"
-                v-model="otpCode.two"
+                v-model="two"
                 pattern="[0-9]"
                 required
               />
@@ -124,40 +111,38 @@ function handleInputOne(e){
                 @keyup="(e)=>focusNext(e,inputFour)"
               
               ref="inputThree"
-              class="text-4xl text-light-green-number  w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none  bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none pr-1"
+              class="text-4xl text-light-green-number  w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none  bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none "
               type="text"
-              maxlength="1"
-              v-model="otpCode.three"
-              size="1"
+              v-model="three"
               pattern="[0-9]"
               required
               />
             </div>
             <div class="w-16 h-16 pr-1 mr-2">
                 <input
-                  @keyup="(e)=>focusNext(e,buttonConfirm)"
-              ref="inputFour"
-                class="text-4xl  text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none  bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none pr-1"
+                @keyup="(e)=>focusNext(e,buttonConfirm)"
+                
+                ref="inputFour"
+                class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center  pl-5 pr-5 outline-none  bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none "
                 type="text"
-                maxlength="1"
-                v-model="otpCode.four"
+                v-model="four"
                 size="1"
-
                 pattern="[0-9]"
                 required
               />
             </div>
           </div>
+          <div>
+              <p class="flex gap-1 items-center " dir="rtl">
+                  <span class="text-lg">صبر کنید، در حال دریافت کد تایید!!</span>
+                  <span class="pt-1">
+                      <nuxt-icon class="animate-spin text-2xl "  name="PointPontSpinner" />
+                  </span>
+              </p>
+          </div>
+          </div>
 
-          <div class="flex flex-col space-y-3">
-            <div>
-                <p class="flex items-center" dir="rtl">
-                    <span>صبر کنید، در حال دریافت کد تایید!!</span>
-                    <span >
-                        <nuxt-icon name="PointPontSpinner" />
-                    </span>
-                </p>
-            </div>
+          <div class="flex  flex-col space-y-3">
             <div>
               <button
               ref="buttonConfirm"
