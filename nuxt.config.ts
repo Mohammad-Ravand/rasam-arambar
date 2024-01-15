@@ -36,6 +36,12 @@ export default defineNuxtConfig({
  
     },
   },
+  css: 
+  [
+    '~/assets/css/font.css',
+    '~/assets/css/global.css',
+],
+
  
   devtools: { enabled: true }
 })

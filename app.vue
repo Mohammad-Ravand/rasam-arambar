@@ -1,3 +1,7 @@
+
+<script setup>
+</script>
+
 <template>
     <NuxtLoadingIndicator />
 
@@ -5,3 +9,4 @@
       <NuxtPage />
     </NuxtLayout>
 </template>
+
