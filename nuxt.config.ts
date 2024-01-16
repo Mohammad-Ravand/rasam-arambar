@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     '@vee-validate/nuxt',
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
-
+    'nuxt-swiper',
     'nuxt-jwt-auth',
     '@nuxt/image',
     // '@sidebase/nuxt-auth'
@@ -34,6 +34,17 @@ export default defineNuxtConfig({
     public: {
       API_BASE_URL: process.env.API_BASE_URL,
  
+    },
+  },
+  veeValidate: {
+    // disable or enable auto imports
+    autoImports: true,
+    // Use different names for components
+    componentNames: {
+      Form: 'VeeForm',
+      Field: 'VeeField',
+      FieldArray: 'VeeFieldArray',
+      ErrorMessage: 'VeeErrorMessage',
     },
   },
   css: 
