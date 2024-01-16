@@ -6,7 +6,7 @@
 <div class="bg-[#bd1e59] flex flex-col items-center justify-between min-h-screen p-4">
   <div class="flex flex-col items-center justify-center pt-10">
     <img
-      src="images/intro.webp"
+      src="/images/intro.webp"
       alt="Logo"
       class="mb-2"
       width="200"
@@ -18,7 +18,7 @@
   </div>
   <div class="flex flex-col items-center justify-center">
     <img
-    src="images/logo.png"
+    src="/images/logo.png"
       alt="Delivery Illustration"
       width="200"
       height="300"
