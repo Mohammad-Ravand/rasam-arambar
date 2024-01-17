@@ -88,7 +88,7 @@ async function login() {
     type: route.query.type,
   });
 
-  navigateTo('/profile/verify')
+  navigateTo('/Auth/verify')
 }
 </script>
 

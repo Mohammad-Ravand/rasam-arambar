@@ -33,7 +33,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       API_BASE_URL: process.env.API_BASE_URL,
- 
+
     },
   },
   veeValidate: {
@@ -47,12 +47,13 @@ export default defineNuxtConfig({
       ErrorMessage: 'VeeErrorMessage',
     },
   },
-  css: 
-  [
-    '~/assets/css/font.css',
-    '~/assets/css/global.css',
-],
+  css:
+    [
+      '~/assets/css/font.css',
+      '~/assets/css/global.css',
+    ],
+  plugins: [],
 
- 
+
   devtools: { enabled: true }
 })
