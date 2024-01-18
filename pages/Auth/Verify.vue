@@ -5,17 +5,13 @@ const authStore = useAuthStore();
 
 const route = useRoute();
 
-const otpCode = useState("optCoder", () => ({
-  one: null,
-  two: null,
-  four: null,
-  five: null,
-}));
+
 
 const inputOne = ref(null);
 const inputTwo = ref(null);
 const inputThree = ref(null);
 const inputFour = ref(null);
+const inputFive = ref(null);
 const buttonConfirm = ref(null);
 
 function focusNext(e, inputRef) {
@@ -28,6 +24,7 @@ const one = useInputCode();
 const two = useInputCode();
 const three = useInputCode();
 const four = useInputCode();
+const five = useInputCode();
 const loadingSendOpt = ref(false);
 
 // login user
@@ -59,7 +56,8 @@ const clientOptCode = computed(() => {
     one.value.toString()+
     two.value.toString()+
     three.value.toString()+
-    four.value.toString()
+    four.value.toString()+
+    five.value.toString()
   );
 });
 
@@ -83,7 +81,9 @@ async function verify() {
         },
       }
     );
-    console.log(r)
+    console.log(JSON.parse(r))
+
+    // navigateTo('/profile/panel')
   } catch (error) {
     console.log(error)
   }
@@ -122,13 +122,13 @@ onMounted(() => {
         <div class="flex flex-col space-y-16">
           <div class="flex flex-col gap-4 items-center">
             <div
-              class="flex flex-row items-center justify-between mx-auto w-full max-w-xs"
+              class="flex flex-row items-center justify-between mx-auto w-full max-w-sm"
             >
               <div class="w-16 h-16 pr-1 mr-2">
                 <input
                   @keyup="(e) => focusNext(e, inputTwo)"
                   ref="inputOne"
-                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none"
+                  class="text-4xl  text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center px-2 outline-none bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none"
                   type="text"
                   pattern="[0-9]"
                   v-model="one"
@@ -139,7 +139,7 @@ onMounted(() => {
                 <input
                   @keyup="(e) => focusNext(e, inputThree)"
                   ref="inputTwo"
-                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none"
+                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center px-2 outline-none bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none"
                   type="text"
                   v-model="two"
                   pattern="[0-9]"
@@ -150,7 +150,7 @@ onMounted(() => {
                 <input
                   @keyup="(e) => focusNext(e, inputFour)"
                   ref="inputThree"
-                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none"
+                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center px-2 outline-none bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none"
                   type="text"
                   v-model="three"
                   pattern="[0-9]"
@@ -159,11 +159,23 @@ onMounted(() => {
               </div>
               <div class="w-16 h-16 pr-1 mr-2">
                 <input
-                  @keyup="(e) => focusNext(e, buttonConfirm)"
+                  @keyup="(e) => focusNext(e, inputFive)"
                   ref="inputFour"
                   class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center pl-5 pr-5 outline-none bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none"
                   type="text"
                   v-model="four"
+                  size="1"
+                  pattern="[0-9]"
+                  required
+                />
+              </div>
+              <div class="w-16 h-16 pr-1 mr-2">
+                <input
+                  @keyup="(e) => focusNext(e, buttonConfirm)"
+                  ref="inputFive"
+                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-4 border-gray-400 h-full flex flex-col items-center justify-center text-center pl-5 pr-5 outline-none bg-transparent focus:bg-gray-50 focus:ring-1 rounded-none"
+                  type="text"
+                  v-model="five"
                   size="1"
                   pattern="[0-9]"
                   required

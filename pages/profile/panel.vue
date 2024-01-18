@@ -9,11 +9,11 @@
           <span
             class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full"
           >
-            <img
+            <!-- <img
               class="aspect-square h-full w-full"
               alt="Profile picture"
               src="../driver/src/images/panel-slider.jpg?height=40&amp;width=40"
-            />
+            /> -->
           </span>
           <div class="flex space-x-2">
             <svg
