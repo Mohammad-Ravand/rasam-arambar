@@ -12,7 +12,7 @@ onMounted(async ()=>{
   const res = await fetchRequiredData();
   setTimeout(() => {
     navigateTo('/registerType')
-  }, 1000);
+  }, 100000);
 });
 </script>
   

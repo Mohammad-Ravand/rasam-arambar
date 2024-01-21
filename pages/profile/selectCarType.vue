@@ -7,17 +7,21 @@ import * as yup from "yup";
 
 const { values, errors, defineField } = useForm({
   validationSchema: yup.object({
-    carType: yup
+    fullName: yup
       .string()
-      .required("فیلد نام الزامی است ")
+      .required("فیلد نام الزامی است "),
+
+    nationalCode: yup.string().required(),
+
+    profileImage: yup.string().required()
 
   }),
 });
 
-const [carType, carTypeAttrs] = defineField("carType");
+const [fullName, carTypeAttrs] = defineField("fullName");
 
 onMounted(()=>{
-    carType.value=''
+    fullName.value=''
 })
 </script>
 
@@ -30,19 +34,19 @@ onMounted(()=>{
         <nuxt-icon name="ArrowLeftFilled" filled />
       </NuxtLink>
     </div>
-    <div class="flex gap-4 flex-col items-between space-y-12">
+    <div class="flex gap-2 flex-col items-between space-y-6">
       <NuxtImg
-        src="/images/trucklogin.png"
+        src="/images/Whateruck.webp"
         alt="Truck login"
-        class="max-w-xs object-fill"
+        class="max-w-xs px-10 object-fill"
         style="object-fit: cover"
       />
-      <div class="gap-3 flex flex-col">
+      <div class="gap-3 px-5 flex flex-col">
         <div
-          class="flex flex-col gap-3 items-center justify-center bg-rose-500 py-2 px-4 rounded-lg shadow-md"
+          class="flex mx-5 flex-col gap-3 items-center justify-center bg-rose-500 py-2 px-4 rounded-lg shadow-md"
         >
           <select
-            v-model="carType"
+            v-model="fullName"
             v-bind="carTypeAttrs"
           dir="rtl"
             id="countries"
